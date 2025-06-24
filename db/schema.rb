@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_24_174548) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_24_185122) do
   create_table "categories", force: :cascade do |t|
     t.string "name", limit: 100, null: false
     t.datetime "created_at", null: false
@@ -30,6 +30,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_24_174548) do
     t.index ["province_id"], name: "index_customers_on_province_id"
   end
 
+  create_table "orderitems", force: :cascade do |t|
+    t.integer "order_id", null: false
+    t.integer "product_id", null: false
+    t.integer "quantity", null: false
+    t.decimal "price_at_time_of_order", precision: 10, scale: 2, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_orderitems_on_order_id"
+    t.index ["product_id"], name: "index_orderitems_on_product_id"
+  end
+
   create_table "orders", force: :cascade do |t|
     t.integer "customer_id", null: false
     t.integer "province_id", null: false
@@ -46,6 +57,24 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_24_174548) do
     t.datetime "updated_at", null: false
     t.index ["customer_id"], name: "index_orders_on_customer_id"
     t.index ["province_id"], name: "index_orders_on_province_id"
+  end
+
+  create_table "product_categories", force: :cascade do |t|
+    t.integer "product_id", null: false
+    t.integer "category_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_product_categories_on_category_id"
+    t.index ["product_id"], name: "index_product_categories_on_product_id"
+  end
+
+  create_table "productcategories", force: :cascade do |t|
+    t.integer "product_id", null: false
+    t.integer "category_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_productcategories_on_category_id"
+    t.index ["product_id"], name: "index_productcategories_on_product_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -67,6 +96,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_24_174548) do
   end
 
   add_foreign_key "customers", "provinces"
+  add_foreign_key "orderitems", "orders"
+  add_foreign_key "orderitems", "products"
   add_foreign_key "orders", "customers"
   add_foreign_key "orders", "provinces"
+  add_foreign_key "product_categories", "categories"
+  add_foreign_key "product_categories", "products"
+  add_foreign_key "productcategories", "categories"
+  add_foreign_key "productcategories", "products"
 end
