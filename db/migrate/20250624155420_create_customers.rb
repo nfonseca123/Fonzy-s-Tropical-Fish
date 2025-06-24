@@ -1,4 +1,4 @@
-class CreateCustomers < ActiveRecord::Migration[7.0]
+class CreateCustomers < ActiveRecord::Migration[8.0]
   def change
     create_table :customers do |t|
       t.references :province, null: false, foreign_key: true

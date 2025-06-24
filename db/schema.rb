@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_24_145858) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_24_155838) do
   create_table "customers", force: :cascade do |t|
     t.integer "province_id", null: false
     t.string "first_name", limit: 50, null: false
@@ -24,8 +24,26 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_24_145858) do
     t.index ["province_id"], name: "index_customers_on_province_id"
   end
 
-  create_table "provinces", primary_key: "province_id", force: :cascade do |t|
-    t.string "name", limit: 50, null: false
+  create_table "orders", force: :cascade do |t|
+    t.integer "customer_id", null: false
+    t.integer "province_id", null: false
+    t.decimal "subtotal", precision: 10, scale: 2, null: false
+    t.decimal "gst_amount", precision: 10, scale: 2
+    t.decimal "pst_amount", precision: 10, scale: 2
+    t.decimal "hst_amount", precision: 10, scale: 2
+    t.decimal "tax_total", precision: 10, scale: 2
+    t.decimal "total_price", precision: 10, scale: 2, null: false
+    t.string "payment_id", limit: 255
+    t.string "payment_provider", limit: 50
+    t.string "order_status", limit: 50, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_orders_on_customer_id"
+    t.index ["province_id"], name: "index_orders_on_province_id"
+  end
+
+  create_table "provinces", force: :cascade do |t|
+    t.string "name"
     t.decimal "gst_rate", precision: 10, scale: 2
     t.decimal "pst_rate", precision: 10, scale: 2
     t.decimal "hst_rate", precision: 10, scale: 2
@@ -34,4 +52,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_24_145858) do
   end
 
   add_foreign_key "customers", "provinces"
+  add_foreign_key "orders", "customers"
+  add_foreign_key "orders", "provinces"
 end
