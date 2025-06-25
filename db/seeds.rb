@@ -8,8 +8,6 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-# Generate a CSV file with AI for the products table
-#then write the seeds script
 
 require 'csv'
 
@@ -33,6 +31,15 @@ CSV.foreach(products_path, headers: true) do |row| next if row['name'].blank?
     current_price: row['current_price'],
     stock_quantity: row['stock_quantity'],
     on_sale: row['on_sale'] == 'true'
+  )
+end
+
+categories_path = Rails.root.join('db', 'categories.csv')
+
+CSV.foreach(categories_path, headers: true) do |row|
+  next if row['name'].blank?
+  Category.create!(
+    name: row['name'],
   )
 end
 
