@@ -10,6 +10,7 @@
 
 
 require 'csv'
+require 'faker'
 
 provinces_path = Rails.root.join('db', 'provinces.csv')
 
@@ -42,4 +43,13 @@ CSV.foreach(categories_path, headers: true) do |row|
     name: row['name'],
   )
 end
+
+30.times do
+  ProductCategory.create!(
+    product_id: Product.order('RANDOM()').first.id,
+    category_id: Category.order('RANDOM()').first.id
+  )
+end
+
+
 
