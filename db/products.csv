@@ -1,0 +1,12 @@
+name,description,current_price,stock_quantity,on_sale
+Betta Fish,"Colorful freshwater fish, easy to care for.",12.99,30,true
+Goldfish,"Classic orange goldfish, great for beginners.",4.50,100,false
+Neon Tetra,"Tiny, vibrant schooling fish.",2.25,200,true
+Angelfish,"Graceful, semi-aggressive freshwater fish.",15.75,25,false
+Guppy,"Active and colorful livebearer.",1.99,150,true
+Clown Loach,"Bottom-dweller with unique stripes.",18.90,10,false
+Zebra Danio,"Hardy fish with black and white stripes.",2.75,80,true
+Corydoras Catfish,"Peaceful cleaner fish, great in groups.",6.50,40,false
+Discus,"Large and vibrant centerpiece fish.",39.99,5,false
+Plecostomus,"Algae eater for larger tanks.",12.00,15,true
+
