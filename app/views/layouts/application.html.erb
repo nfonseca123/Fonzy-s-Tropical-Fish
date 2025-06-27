@@ -25,7 +25,7 @@
   <body>
     <% if customer_signed_in? %>
       Logged in as <%= current_customer.first_name %> |
-    <%= link_to "Logout", destroy_customer_session_path, method: :delete %>
+    <%= button_to 'Log out', destroy_customer_session_path, method: :delete %>
     <% else %>
       <%= link_to "Login", new_customer_session_path %> |
       <%= link_to "Sign Up", new_customer_registration_path %>
