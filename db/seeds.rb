@@ -26,13 +26,20 @@ end
 products_path = Rails.root.join('db', 'products.csv')
 
 CSV.foreach(products_path, headers: true) do |row| next if row['name'].blank?
-  Product.create!(
+  product = Product.create!(
     name: row['name'],
     description: row['description'],
     current_price: row['current_price'],
     stock_quantity: row['stock_quantity'],
     on_sale: row['on_sale'] == 'true'
   )
+
+  image_path = Rails.root.join(row['image_path'])
+  if File.exist?(image_path)
+    product.image.attach(io: File.open(image_path), filename: File.basename(image_path), content_type: "image/jpeg")
+  else
+    puts "Image not found for #{row['name']}"
+  end
 end
 
 categories_path = Rails.root.join('db', 'categories.csv')
