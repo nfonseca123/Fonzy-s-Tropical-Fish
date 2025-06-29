@@ -1,19 +1,19 @@
-<h1 class="mb-4">All Products</h1>
+<h1>All Products</h1>
 
 <div class="row">
   <% @products.each do |product| %>
-    <div class="col-md-4 mb-4">
-      <div class="card h-100">
+    <div class="col-md-4">
+      <div class="card">
         <% if product.image.attached? %>
-          <%= image_tag product.image, class: "card-img-top", style: "height: 200px; object-fit: cover;" %>
+          <%= image_tag product.image, class: "card-img-top" %>
         <% else %>
-          <div class="card-img">
-            <span class="text-muted">No image</span>
+          <div class="card-img-top">
+            <span>No image available</span>
           </div>
         <% end %>
         <div class="card-body">
-          <h5 class="card-title"><%= product.name %></h5>
-          <h5 class="card-price">C<%= number_to_currency(product.current_price) %></h5>
+          <h5><%= product.name %></h5>
+          <h6>C<%= number_to_currency(product.current_price) %></h6>
           <%= link_to "View Product", product_path(product), class: "btn btn-primary" %>
         </div>
       </div>

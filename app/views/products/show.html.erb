@@ -1,15 +1,23 @@
-<div class="card h-100">
-  <% if @product.image.attached? %>
-    <%= image_tag @product.image, class: "card-img-top", style: "height: 300px; object-fit: cover;" %>
-  <% else %>
-    <div class="card-img-top d-flex align-items-center justify-content-center text-muted bg-light" style="height: 300px;">
-      <span>No image available</span>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <% if @product.image.attached? %>
+          <%= image_tag @product.image, class: "card-img-top" %>
+        <% else %>
+          <div class="card-img-top">
+            <span>No image available</span>
+          </div>
+        <% end %>
+        <div class="card-body">
+          <h5><%= @product.name %></h5>
+          <h6>C<%= number_to_currency(@product.current_price) %></h6>
+          <p><%= @product.description %></p>
+          <p>
+            <%= @product.stock_quantity > 0 ? "#{@product.stock_quantity} in stock" : "Out of stock" %>
+          </p>
+        </div>
+      </div>
     </div>
-  <% end %>
-  <div class="card-body">
-    <h5 class="card-title"><%= @product.name %></h5>
-    <h5 class="card-price">C<%= number_to_currency(@product.current_price) %></h5>
-    <p class="card-text"><%= @product.description %></p>
-    <h5 class="card-stock"><%= @product.stock_quantity > 0 ? "#{@product.stock_quantity} in stock" : "Out of stock" %></h5>
   </div>
 </div>
