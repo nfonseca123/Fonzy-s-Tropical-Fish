@@ -1,6 +1,6 @@
 name,description,current_price,stock_quantity,on_sale,image_path
 Betta Fish,"Colorful freshwater fish, easy to care for.",12.99,30,true,app/assets/images/betta.jpg
-Goldfish,"Classic orange goldfish, great for beginners.",4.50,100,false,app/assets/images/goldfish.jpg
+Goldfish,"Classic orange goldfish.",4.50,100,false,app/assets/images/goldfish.jpg
 Neon Tetra,"Tiny, vibrant schooling fish.",2.25,200,true,app/assets/images/neontetra.jpg
 Angelfish,"Graceful, semi-aggressive freshwater fish.",15.75,25,false,app/assets/images/angelfish.jpg
 Guppy,"Active and colorful livebearer.",1.99,150,true,app/assets/images/guppy.jpg

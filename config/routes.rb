@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Active Admin routes
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
@@ -11,5 +10,6 @@ Rails.application.routes.draw do
   }
 
   root to: 'home#index'
-  get "/custom_logout", to: "sessions#custom_destroy", as: :custom_logout
+
+  resources :products
 end
