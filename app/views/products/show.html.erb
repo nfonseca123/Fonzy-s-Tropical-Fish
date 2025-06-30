@@ -14,8 +14,14 @@
           <h6>C<%= number_to_currency(@product.current_price) %></h6>
           <p><%= @product.description %></p>
           <p>
-            <%= @product.stock_quantity > 0 ? "#{@product.stock_quantity} in stock" : "Out of stock" %>
+            <%= @product.stock_quantity && @product.stock_quantity > 0 ? "#{@product.stock_quantity} in stock" : "Out of stock" %>
           </p>
+          <%= form_with url: add_to_cart_path(@product), method: :post, local: true do |form| %>
+          <div class="input-group mb-2">
+            <%= form.number_field :quantity, value: 1, min: 1, class: "form-control", style: "max-width: 80px;" %>
+            <%= form.submit "Add to Cart", class: "btn btn-sm btn-outline-primary" %>
+          </div>
+        <% end %>
         </div>
       </div>
     </div>
