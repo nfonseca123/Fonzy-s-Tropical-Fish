@@ -5,11 +5,11 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 
   devise_for :customers, controllers: {
-    registrations: 'customers/registrations',
+    registrations: "customers/registrations",
     sessions: "customers/sessions"
   }
 
-  root to: 'home#index'
+  root to: "home#index"
 
   resources :products
 

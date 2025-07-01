@@ -58,5 +58,18 @@ end
   )
 end
 
+75.times do
+  customers = Customer.create!(
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    email: Faker::Internet.email,
+    address: Faker::Address.full_address,
+    phone: Faker::PhoneNumber.phone_number,
+    password: 'password234',
+    province_id: Province.pluck(:id).sample
+  )
+end
+
+
 # Create an admin user
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
