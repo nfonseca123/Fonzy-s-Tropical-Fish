@@ -4,6 +4,7 @@ gem "faker"
 gem "devise", "~> 4.9"
 gem "activeadmin"
 gem "rubocop-rails", require: false
+gem "kaminari"
 
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"

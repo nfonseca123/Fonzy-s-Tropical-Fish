@@ -14,11 +14,26 @@
             class: "form-select" %>
     </div>
     <div class="col-md-3">
+      <%= label_tag :new_products, "Show only new products" %>
+      <%= select_tag :new_products,
+            options_for_select([["All Products", ""], ["New in last 3 days", "true"]], params[:new_products]),
+            class: "form-select" %>
+    </div>
+    <div class="col-md-2">
+      <%= label_tag :recently_updated_products, "Show only recently updated products" %>
+      <%= select_tag :recently_updated_products,
+            options_for_select([["All Products", ""], ["Recently updated", "true"]], params[:recently_updated_products]),
+            class: "form-select" %>
+    </div>
+    <div class="col-md-1">
       <%= submit_tag "Filter", class: "btn btn-primary w-100" %>
     </div>
   </div>
 <% end %>
-
+<p>
+  <%= raw @products.total_count %>
+  product<%= "s" unless @products.total_count == 1 %> found
+</p>
 <% if @products.empty? %>
   <p class="text-muted mt-4 text-center">No products found.</p>
 <% end %>
@@ -49,3 +64,5 @@
     </div>
   <% end %>
 </div>
+
+<%= paginate @products %>
