@@ -1,20 +1,49 @@
-<h1>All Products</h1>
+<h1 class="mb-4 text-center">All Products</h1>
 
-<div class="row">
-  <% @products.each do |product| %>
+<%= form_with url: products_path, method: :get, local: true, class: "mb-4" do %>
+  <div class="row g-3 align-items-end">
+    <div class="col-md-5">
+      <%= label_tag :query, "Search by Text" %>
+      <%= text_field_tag :query, @query, class: "form-control", placeholder: "Type to search..." %>
+    </div>
     <div class="col-md-4">
-      <div class="card">
+      <%= label_tag :category_id, "Filter by Category" %>
+      <%= select_tag :category_id,
+            options_from_collection_for_select(@categories, :id, :name, @selected_category),
+            include_blank: "All Categories",
+            class: "form-select" %>
+    </div>
+    <div class="col-md-3">
+      <%= submit_tag "Filter", class: "btn btn-primary w-100" %>
+    </div>
+  </div>
+<% end %>
+
+<% if @products.empty? %>
+  <p class="text-muted mt-4 text-center">No products found.</p>
+<% end %>
+
+<div class="row row-cols-1 row-cols-md-3 g-4 mt-3">
+  <% @products.each do |product| %>
+    <div class="col">
+      <div class="card h-100 shadow-sm">
         <% if product.image.attached? %>
-          <%= image_tag product.image, class: "card-img-top" %>
+          <%= image_tag product.image, class: "card-img-top", style: "object-fit: cover; height: 200px;" %>
         <% else %>
-          <div class="card-img-top">
-            <span>No image available</span>
+          <div class="card-img-top d-flex justify-content-center align-items-center bg-light" style="height: 200px;">
+            <span class="text-muted">No image available</span>
           </div>
         <% end %>
         <div class="card-body">
-          <h5><%= product.name %></h5>
-          <h6>C<%= number_to_currency(product.current_price) %></h6>
-          <%= link_to "View Product", product_path(product), class: "btn btn-primary" %>
+          <h5 class="card-title"><%= product.name %></h5>
+          <h6 class="card-subtitle mb-2 text-success">C<%= number_to_currency(product.current_price) %></h6>
+          <p class="card-text"><%= product.description %></p>
+          <div class="mb-2">
+            <% product.categories.each do |category| %>
+              <span class="badge bg-info text-dark">@<%= category.name %></span>
+            <% end %>
+          </div>
+          <%= link_to "View Product", product_path(product), class: "btn btn-outline-primary w-100" %>
         </div>
       </div>
     </div>
