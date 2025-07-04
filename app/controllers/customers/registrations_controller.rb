@@ -8,7 +8,9 @@ class Customers::RegistrationsController < Devise::RegistrationsController
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [ :first_name, :last_name, :address, :province_id ])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [
+      :first_name, :last_name, :address, :province_id, :phone
+    ])
   end
 
   # GET /resource/sign_up
