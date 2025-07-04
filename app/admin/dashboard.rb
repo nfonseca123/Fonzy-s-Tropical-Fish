@@ -5,6 +5,7 @@ ActiveAdmin.register_page "Dashboard" do
 
   content title: proc { I18n.t("active_admin.dashboard") } do
     # Example of a simple dashboard with columns and panels.
+    para link_to "Create New Product", new_admin_product_path
     columns do
       column do
         panel "All Products" do

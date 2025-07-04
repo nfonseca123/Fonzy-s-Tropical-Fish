@@ -1,9 +1,7 @@
 ActiveAdmin.register Product do
   # Permit parameters for strong assignment
-  permit_params :name, :description, :current_price, :stock_quantity, :on_sale, :image
+  permit_params :name, :description, :current_price, :stock_quantity, :on_sale, :image, category_ids: []
   menu false
-
-
   actions :all
 
   index do
@@ -30,6 +28,9 @@ ActiveAdmin.register Product do
       row :current_price
       row :stock_quantity
       row :on_sale
+      row :categories do |product|
+        product.categories.map(&:name).join(", ")
+      end
       row "Image" do |product|
         if product.image.attached?
           image_tag product.image
@@ -48,6 +49,7 @@ ActiveAdmin.register Product do
       f.input :stock_quantity
       f.input :on_sale
       f.input :image, as: :file
+      f.input :categories, as: :check_boxes, collection: Category.all
     end
     f.actions
   end
