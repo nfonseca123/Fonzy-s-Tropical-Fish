@@ -5,10 +5,17 @@
     <% @cart_items.each do |product| %>
       <li>
         <%= product.name %> — Quantity: <%= cart[product.id.to_s] %>
+            Price per Unit: $<%= product.current_price %><br>
+            Total: $<%= @cart_totals[product.id] %>
         <%= button_to "Remove", remove_from_cart_path(product), method: :delete, class: "btn btn-sm btn-danger" %>
       </li>
     <% end %>
+    <li>
+      <h3>Cart Total: <%=@cart_total%></h3>
+      <h6>Taxes are calculated at checkout.</h6>
+    </li>
   </ul>
+  <%= link_to "Proceed to Checkout", checkout_path, class: "btn btn-primary" %>
 <% else %>
   <p>Your cart is empty.</p>
 <% end %>

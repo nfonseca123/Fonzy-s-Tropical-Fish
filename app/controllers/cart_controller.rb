@@ -1,6 +1,13 @@
 class CartController < ApplicationController
   def show
     @cart_items = Product.find(cart.keys)
+
+    @cart_totals = @cart_items.each_with_object({}) do |product, hash|
+      quantity = cart[product.id.to_s]
+      hash[product.id] = product.current_price * quantity
+    end
+
+    @cart_total = @cart_totals.values.sum
   end
 
   def add

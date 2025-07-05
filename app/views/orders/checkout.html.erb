@@ -1,0 +1,39 @@
+<h2>Order Information</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Quantity</th>
+      <th>Unit Price</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @cart_items.each do |item| %>
+      <tr>
+        <td><%= item.name %></td>
+        <td><%= cart[item.id.to_s] %></td>
+        <td>$<%= '%.2f' % item.current_price %></td>
+        <td>$<%= '%.2f' % (item.current_price * cart[item.id.to_s]) %></td>
+      </tr>
+    <% end %>
+    <tr>
+      <td colspan="3" style="text-align: right;"><strong>Subtotal:</strong></td>
+      <td>$<%= '%.2f' % @cart_total %></td>
+    </tr>
+  </tbody>
+</table>
+<h2>Shipping Information</h2>
+<% if !customer_signed_in? %>
+  <h1>Sign in or create an account to complete checkout</h1>
+  <%= link_to "Sign in", new_customer_session_path %>
+  <%= link_to "Create Account", new_customer_registration_path %>
+
+
+<% else %>
+  <%= button_to "Pay with Stripe", start_payment_path, method: :post, class: "btn btn-success" %>
+<% end %>
+
+
+

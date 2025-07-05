@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get "orders/checkout"
+  get "orders/process_checkout"
+  get "orders/show"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   devise_for :admin_users, ActiveAdmin::Devise.config
@@ -16,4 +19,10 @@ Rails.application.routes.draw do
   get "cart", to: "cart#show"
   post "cart/add/:id", to: "cart#add", as: "add_to_cart"
   delete "cart/remove/:id", to: "cart#remove", as: "remove_from_cart"
+  resources :orders, only: [:show]
+  get "checkout", to: "orders#checkout"
+  post "checkout/payment", to: "orders#start_payment", as: :start_payment
+  get "order/success", to: "orders#success", as: :order_success
+
+
 end
