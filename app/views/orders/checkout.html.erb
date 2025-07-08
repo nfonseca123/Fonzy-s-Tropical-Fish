@@ -19,6 +19,12 @@
       </tr>
     <% end %>
     <tr>
+      <td><%= @province_name%>
+      <td>GST <%=@gst_rate%></td>
+      <td>PST <%=@pst_rate%></td>
+      <td>HST <%=@hst_rate%></td>
+    </tr>
+    <tr>
       <td colspan="3" style="text-align: right;"><strong>Subtotal:</strong></td>
       <td>$<%= '%.2f' % @cart_total %></td>
     </tr>
