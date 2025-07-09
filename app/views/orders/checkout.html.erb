@@ -30,14 +30,12 @@
     </tr>
   </tbody>
 </table>
-<h2>Shipping Information</h2>
 <% if !customer_signed_in? %>
   <h1>Sign in or create an account to complete checkout</h1>
   <%= link_to "Sign in", new_customer_session_path %>
   <%= link_to "Create Account", new_customer_registration_path %>
-
-
 <% else %>
+  <%= render "form" %>
   <%= button_to "Pay with Stripe", start_payment_path, method: :post, class: "btn btn-success" %>
 <% end %>
 

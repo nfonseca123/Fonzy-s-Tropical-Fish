@@ -7,7 +7,7 @@ gem "rubocop-rails", require: false
 gem "kaminari"
 gem "stripe"
 # In your Gemfile
-gem "dotenv-rails", groups: [:development, :test]
+gem "dotenv-rails", groups: [ :development, :test ]
 
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
