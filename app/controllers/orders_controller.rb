@@ -2,6 +2,7 @@ class OrdersController < ApplicationController
   def checkout
     if current_customer
       province = current_customer.province
+      @province_id = province&.id
 
       unless province
         redirect_to root_path, alert: "We couldn't determine your province. Please update your profile." and return
@@ -26,6 +27,7 @@ class OrdersController < ApplicationController
     end
 
     @cart_total = @cart_totals.values.sum
+
   end
 
   def start_payment

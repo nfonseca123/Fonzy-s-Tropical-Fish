@@ -62,6 +62,7 @@ COPY --from=build /rails /rails
 RUN groupadd --system --gid 1000 rails && \
     useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash && \
     chown -R rails:rails db log storage tmp
+RUN apt-get update -qq && apt-get install --no-install-recommends -y libvips
 USER 1000:1000
 
 # Entrypoint prepares the database.
@@ -70,3 +71,12 @@ ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 # Start server via Thruster by default, this can be overwritten at runtime
 EXPOSE 80
 CMD ["./bin/thrust", "./bin/rails", "server"]
+
+#Build dockerfile docker build -t fonzys_tropical_fish .
+
+#Run docker
+# run -d -p 80:80 \
+#   -e RAILS_ENV=production \
+#   -e SECRET_KEY_BASE=302f426511feee45e756da0843fde358 \
+#   --name fonzys_tropical_fish \
+#   fonzys_tropical_fish
