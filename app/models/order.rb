@@ -7,7 +7,7 @@ class Order < ApplicationRecord
   validates :address_line1, :city, :postal_code, presence: true
   validates :province, presence: true
 
-  validates :order_status, presence: true, inclusion: { in: %w[pending paid shipped completed cancelled] }
+  validates :order_status, presence: true, inclusion: { in: %w[unpaid paid shipped] }
 
 
   validates :subtotal, numericality: { greater_than_or_equal_to: 0 }

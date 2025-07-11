@@ -61,13 +61,13 @@ class OrdersController < ApplicationController
       Rails.logger.error "Order creation failed: #{@order.errors.full_messages.join(', ')}"
     end
 
-    @orderId = @order.id
+    @order_id = @order.id
 
     stripe_session = Stripe::Checkout::Session.create(
       payment_method_types: ["card"],
       line_items: build_line_items(@order.province),
       mode: "payment",
-      success_url: "#{order_success_url}?order_id=#{@orderId}",
+      success_url: "#{order_success_url}?order_id=#{@order_id}",
       cancel_url: checkout_url
     )
 
@@ -77,7 +77,7 @@ class OrdersController < ApplicationController
   def success
     @order = Order.find_by(id: params[:order_id])
 
-    # Mark order as paid
+
     @order.update(order_status: "paid")
 
     # Clear the cart if you want

@@ -40,7 +40,7 @@
   <%= form.hidden_field :hst_amount, value: (@cart_subtotal * @hst_rate).round(2) %>
   <%= form.hidden_field :tax_total, value: @tax_total.round(2) %>
   <%= form.hidden_field :total_price, value: @total_price.round(2) %>
-  <%= form.hidden_field :order_status, value: "pending" %>
+  <%= form.hidden_field :order_status, value: "unpaid" %>
 
   <%= form.submit "Pay with Stripe", class: "btn btn-success" %>
 <% end %>
