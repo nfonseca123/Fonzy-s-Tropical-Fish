@@ -1,12 +1,11 @@
-<h2>Order Information</h2>
+<h2>Review Your Order</h2>
 
 <table>
   <thead>
     <tr>
       <th>Product</th>
       <th>Quantity</th>
-      <th>Unit Price</th>
-      <th>Total</th>
+      <th>Price</th>
     </tr>
   </thead>
   <tbody>
@@ -15,29 +14,33 @@
         <td><%= item.name %></td>
         <td><%= cart[item.id.to_s] %></td>
         <td>$<%= '%.2f' % item.current_price %></td>
-        <td>$<%= '%.2f' % (item.current_price * cart[item.id.to_s]) %></td>
       </tr>
     <% end %>
-    <tr>
-      <td><%= @province_name%>
-      <td>GST <%=@gst_rate%></td>
-      <td>PST <%=@pst_rate%></td>
-      <td>HST <%=@hst_rate%></td>
-    </tr>
-    <tr>
-      <td colspan="3" style="text-align: right;"><strong>Subtotal:</strong></td>
-      <td>$<%= '%.2f' % @cart_total %></td>
-    </tr>
   </tbody>
 </table>
-<% if !customer_signed_in? %>
-  <h1>Sign in or create an account to complete checkout</h1>
-  <%= link_to "Sign in", new_customer_session_path %>
-  <%= link_to "Create Account", new_customer_registration_path %>
-<% else %>
-  <%= render "form", province_id:@province_id%>
-  <%= button_to "Pay with Stripe", start_payment_path, method: :post, class: "btn btn-success" %>
+
+<p><strong>Subtotal:</strong> $<%= '%.2f' % @cart_subtotal %></p>
+<p><strong>GST:</strong> $<%= '%.2f' % (@cart_subtotal * @gst_rate) %></p>
+<p><strong>PST:</strong> $<%= '%.2f' % (@cart_subtotal * @pst_rate) %></p>
+<p><strong>HST:</strong> $<%= '%.2f' % (@cart_subtotal * @hst_rate) %></p>
+<p><strong>Total:</strong> $<%= '%.2f' % @total_price %></p>
+
+<!-- Submit full order to Stripe -->
+<%= form_with url: start_payment_path, method: :post, local: true do |form| %>
+  <%= form.hidden_field :address_line1, value: @order_params[:address_line1] %>
+  <%= form.hidden_field :address_line2, value: @order_params[:address_line2] %>
+  <%= form.hidden_field :city, value: @order_params[:city] %>
+  <%= form.hidden_field :postal_code, value: @order_params[:postal_code] %>
+  <%= form.hidden_field :province_id, value: @province_id %>
+
+  <!-- Pricing fields -->
+  <%= form.hidden_field :subtotal, value: @cart_subtotal %>
+  <%= form.hidden_field :gst_amount, value: (@cart_subtotal * @gst_rate).round(2) %>
+  <%= form.hidden_field :pst_amount, value: (@cart_subtotal * @pst_rate).round(2) %>
+  <%= form.hidden_field :hst_amount, value: (@cart_subtotal * @hst_rate).round(2) %>
+  <%= form.hidden_field :tax_total, value: @tax_total.round(2) %>
+  <%= form.hidden_field :total_price, value: @total_price.round(2) %>
+  <%= form.hidden_field :order_status, value: "pending" %>
+
+  <%= form.submit "Pay with Stripe", class: "btn btn-success" %>
 <% end %>
-
-
-

@@ -12,9 +12,17 @@
     <% end %>
     <li>
       <h3>Cart Total: <%=@cart_total%></h3>
-      <h6>Taxes are calculated at checkout.</h6>
     </li>
   </ul>
+  <h1>Shipping Address</h1>
+  <% if !customer_signed_in? %>
+  <h1>Sign in or create an account to complete checkout</h1>
+  <%= link_to "Sign in", new_customer_session_path %>
+  <%= link_to "Create Account", new_customer_registration_path %>
+<% else %>
+  <%= render "form", province_id:@province_id%>
+<% end %>
+  <h6>Taxes are calculated at checkout.</h6>
   <%= link_to "Proceed to Checkout", checkout_path, class: "btn btn-primary" %>
 <% else %>
   <p>Your cart is empty.</p>

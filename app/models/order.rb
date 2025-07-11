@@ -7,7 +7,6 @@ class Order < ApplicationRecord
   validates :address_line1, :city, :postal_code, presence: true
   validates :province, presence: true
 
-  validates :payment_id, presence: true, uniqueness: true
   validates :order_status, presence: true, inclusion: { in: %w[pending paid shipped completed cancelled] }
 
 
