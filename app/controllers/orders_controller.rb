@@ -91,6 +91,7 @@ class OrdersController < ApplicationController
     @cart = session[:cart] || {}
     @cart_items = Product.where(id: @cart.keys)
     @cart_items.each do |product|
+      #Update stock quantity
       quantity = @cart[product.id.to_s].to_i
       if quantity > 0
         old_stock = product.stock_quantity
@@ -98,6 +99,16 @@ class OrdersController < ApplicationController
         product.update(stock_quantity: new_stock)
         Rails.logger.info "Updated #{product.name} stock: #{old_stock} → #{new_stock}"
       end
+      # Update order items table
+      Orderitem.create!(
+        order_id: @order.id,
+        product_id: product.id,
+        quantity: quantity,
+        price_at_time_of_order: product.current_price,
+        gst_rate: @order.province.gst_rate,
+        pst_rate: @order.province.pst_rate,
+        hst_rate: @order.province.hst_rate
+      )
     end
 
     session.delete(:cart)
