@@ -64,23 +64,42 @@ class OrdersController < ApplicationController
     @order_id = @order.id
 
     stripe_session = Stripe::Checkout::Session.create(
-      payment_method_types: ["card"],
+      payment_method_types: [ "card" ],
       line_items: build_line_items(@order.province),
       mode: "payment",
       success_url: "#{order_success_url}?order_id=#{@order_id}",
       cancel_url: checkout_url
     )
-
     redirect_to stripe_session.url, allow_other_host: true
   end
 
   def success
+    # Update the order status to paid
     @order = Order.find_by(id: params[:order_id])
 
+    stripe_session = Stripe::Checkout::Session.list({ limit: 1 }).data.find do |s|
+      s.success_url.include?("order_id=#{@order.id}")
+    end
+
+    if stripe_session&.payment_intent
+      @order.update(payment_intent_id: stripe_session.payment_intent)
+    end
 
     @order.update(order_status: "paid")
 
-    # Clear the cart if you want
+    # Clear the cart after successful payment
+    @cart = session[:cart] || {}
+    @cart_items = Product.where(id: @cart.keys)
+    @cart_items.each do |product|
+      quantity = @cart[product.id.to_s].to_i
+      if quantity > 0
+        old_stock = product.stock_quantity
+        new_stock = old_stock - quantity
+        product.update(stock_quantity: new_stock)
+        Rails.logger.info "Updated #{product.name} stock: #{old_stock} → #{new_stock}"
+      end
+    end
+
     session.delete(:cart)
     session.delete(:order_id)
   end

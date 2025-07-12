@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   post "cart/add/:id", to: "cart#add", as: "add_to_cart"
   delete "cart/remove/:id", to: "cart#remove", as: "remove_from_cart"
   resources :orders, only: [ :show ]
-  match "checkout", to: "orders#checkout", via: [:get, :post], as: :checkout
+  match "checkout", to: "orders#checkout", via: [ :get, :post ], as: :checkout
   post "checkout/payment", to: "orders#start_payment", as: :start_payment
   get "order/success", to: "orders#success", as: :order_success
 end
