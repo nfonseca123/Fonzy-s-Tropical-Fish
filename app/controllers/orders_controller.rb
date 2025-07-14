@@ -91,7 +91,7 @@ class OrdersController < ApplicationController
     @cart = session[:cart] || {}
     @cart_items = Product.where(id: @cart.keys)
     @cart_items.each do |product|
-      #Update stock quantity
+      # Update stock quantity
       quantity = @cart[product.id.to_s].to_i
       if quantity > 0
         old_stock = product.stock_quantity

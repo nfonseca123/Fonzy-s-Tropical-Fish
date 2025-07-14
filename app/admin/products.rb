@@ -2,8 +2,6 @@ ActiveAdmin.register Product do
   # Permit parameters for strong assignment
   permit_params :name, :description, :current_price, :stock_quantity, :on_sale, :image, category_ids: []
   menu false
-  actions :all
-
   index do
     selectable_column
     id_column
