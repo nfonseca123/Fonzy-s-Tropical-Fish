@@ -6,6 +6,8 @@ gem "activeadmin"
 gem "rubocop-rails", require: false
 gem "kaminari"
 gem "stripe"
+
+
 # In your Gemfile
 gem "dotenv-rails", groups: [ :development, :test ]
 

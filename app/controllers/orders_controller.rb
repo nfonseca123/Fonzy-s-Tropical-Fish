@@ -111,6 +111,13 @@ class OrdersController < ApplicationController
       )
     end
 
+    if @order.customer.present? && @order.customer.email.present?
+      UserMailer.confirmation_email(@order.customer, @order).deliver_later
+      Rails.logger.info "Sent confirmation email to #{@order.customer.email}"
+    else
+      Rails.logger.warn "No email sent: missing customer or email address"
+    end
+
     session.delete(:cart)
     session.delete(:order_id)
   end
