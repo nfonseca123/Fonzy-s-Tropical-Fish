@@ -16,6 +16,10 @@ class Order < ApplicationRecord
   validates :hst_amount, numericality: { greater_than_or_equal_to: 0 }
   validates :total_price, numericality: { greater_than_or_equal_to: 0 }
 
+  def display_name
+  "Order ##{id} – $#{total_price}"
+  end
+
   def self.ransackable_attributes(auth_object = nil)
     [ "address_line1", "address_line2", "city", "created_at", "customer_id", "gst_amount", "hst_amount", "id", "id_value", "order_status", "payment_intent_id", "postal_code", "province_id", "pst_amount", "subtotal", "tax_total", "total_price", "updated_at" ]
   end

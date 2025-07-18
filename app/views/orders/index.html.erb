@@ -1,0 +1,16 @@
+<h2>My Orders</h2>
+
+<% @orders.each do |order| %>
+  <div class="order-summary">
+    <h3>Order #<%= order.id %> – <%= order.created_at.to_date %></h3>
+    <ul>
+      <% order.orderitems.each do |item| %>
+        <li><%= item.quantity %>x <%= item.product.name %> @ $<%= item.price_at_time_of_order %></li>
+      <% end %>
+    </ul>
+    <p>Subtotal: $<%= order.subtotal %></p>
+    <p>Tax Total: $<%= order.tax_total %></p>
+    <p>Grand Total: $<%= order.total_price %></p>
+    <p>Status: <%= order.order_status.capitalize %></p>
+  </div>
+<% end %>

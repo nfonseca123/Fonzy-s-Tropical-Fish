@@ -5,4 +5,3 @@ class UserMailer < ApplicationMailer
     mail(to: @customer.email, subject: "Thank you for your order!")
   end
 end
-

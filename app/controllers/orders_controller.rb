@@ -1,4 +1,9 @@
 class OrdersController < ApplicationController
+
+  def index
+    @orders = current_customer.orders.includes(:orderitems, :province)
+  end
+
   def checkout
     @order_params = params.permit(
       :address_line1, :address_line2, :city, :province_id,

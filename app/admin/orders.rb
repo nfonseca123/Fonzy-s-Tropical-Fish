@@ -36,7 +36,7 @@ ActiveAdmin.register Order do
       f.input :tax_total
       f.input :total_price
       f.input :payment_intent_id
-      f.input :order_status
+      f.input :order_status, as: :select, collection: ["unpaid", "paid", "shipped"]
     end
     f.actions
   end
