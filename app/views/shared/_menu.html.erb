@@ -1,0 +1,21 @@
+<nav class="main-menu">
+  <div>
+    <% if customer_signed_in? %>
+      <p>Logged in as <%= current_customer.first_name %></p>
+      <%= button_to 'Log out', destroy_customer_session_path, method: :delete %>
+    <% else %>
+      <%= button_to 'Login', new_customer_session_path, method: :get %>
+      <%= button_to 'Sign Up', new_customer_registration_path, method: :get %>
+    <% end %>
+  </div>
+  <ul>
+    <li><%= link_to "Home", root_path %></li>
+    <li><%= link_to "Shop", products_path %></li>
+    <% if customer_signed_in? && request.path != orders_path %>
+      <li><%= link_to "My Orders", orders_path %></li>
+    <% end %>
+    <% unless request.path == cart_path %>
+      <li><%= link_to "Cart", cart_path %></li>
+    <% end %>
+  </ul>
+</nav>
