@@ -1,21 +1,33 @@
 <nav class="main-menu">
   <div>
     <% if customer_signed_in? %>
-      <p>Logged in as <%= current_customer.first_name %></p>
-      <%= button_to 'Log out', destroy_customer_session_path, method: :delete %>
+    <p>Welcome back <%= current_customer.first_name %>!</p>
+    <div id="logout-button-div">
+      <%= button_to 'Log out', destroy_customer_session_path, method: :delete, class: 'menu-buttons' %>
+      <% unless request.path == cart_path %>
+        <%= link_to cart_path do %>
+          <%= image_tag("icons/shopping-bag.png", alt: "Cart Icon", size: "20x20", class: "cart-icon", title: "Shopping Cart") %>
+        <% end %>
+      <% end %>
+    </div>
     <% else %>
-      <%= button_to 'Login', new_customer_session_path, method: :get %>
-      <%= button_to 'Sign Up', new_customer_registration_path, method: :get %>
+    <div id="login-signup-buttons-div">
+      <%= button_to 'Login', new_customer_session_path, method: :get, class: 'menu-buttons'%>
+      <%= button_to 'Sign Up', new_customer_registration_path, method: :get, class: 'menu-buttons' %>
+      <%= link_to cart_path do %>
+        <%= image_tag("icons/shopping-bag.png", alt: "Cart Icon", size: "20x20", class: "cart-icon") %>
+      <% end %>
+    </div>
     <% end %>
   </div>
-  <ul>
-    <li><%= link_to "Home", root_path %></li>
-    <li><%= link_to "Shop", products_path %></li>
-    <% if customer_signed_in? && request.path != orders_path %>
-      <li><%= link_to "My Orders", orders_path %></li>
-    <% end %>
-    <% unless request.path == cart_path %>
-      <li><%= link_to "Cart", cart_path %></li>
-    <% end %>
-  </ul>
+  <h1 id="company-name-h1"><span id="fonsy">Fonsy's</span>Tropical<span id="fish">Fish</span></h1>
+  <div id="menu-links-div">
+    <ul>
+      <li><%= link_to "Home", root_path %></li>
+      <li><%= link_to "Shop", products_path %></li>
+      <% if customer_signed_in? && request.path != orders_path %>
+        <li><%= link_to "My Orders", orders_path %></li>
+      <% end %>
+    </ul>
+  </div>
 </nav>

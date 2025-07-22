@@ -1,10 +1,114 @@
 /*
- * This is a manifest file that'll be compiled into application.css.
- *
- * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
- * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
- * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
- * depending on specificity.
- *
- * Consider organizing styles into separate files for maintainability.
- */
+* This is a manifest file that'll be compiled into application.css.
+*
+* With Propshaft, assets are served efficiently without preprocessing steps. You can still include
+* application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
+* cascading order, meaning styles declared later in the document or manifest will override earlier ones,
+* depending on specificity.
+*
+* Consider organizing styles into separate files for maintainability.
+*/
+
+/*General styles*/
+@font-face {
+  font-family: 'Mermaid';
+  src: url('fonts/Mermaid.otf') format('opentype');
+}
+
+a:visited {
+  color: inherit; /* or any color you prefer */
+  text-decoration: none; /* optional: removes underline */
+}
+
+*{
+  font-family: sans-serif;
+  margin: 0px;
+  padding: 0px;
+}
+
+/* Body styles */
+
+
+/* General styles for the menu */
+
+nav.main-menu {
+  background-color: #000000; /* Dark background for the menu */
+  padding: 10px; /* Padding around the menu */
+}
+
+nav p {
+  color: white;
+  font-size: 10px; /* Font size for the text */
+}
+
+div#login-signup-buttons-div {
+  color:white;
+  display: flex;
+  justify-content: right;
+  gap: 10px;
+}
+
+div#logout-button-div {
+  display: flex;
+  color: white;
+  justify-content: right;
+  align-items: center; /* Vertically centers them */
+  gap: 10px; /* Adds spacing between the <p> and button */
+}
+button.menu-buttons {
+  border: none;
+  background-color: inherit;
+  color: white;
+  font-size: 11px;
+}
+button.menu-buttons:hover {
+  cursor: pointer;
+  color: rgb(171, 166, 166);
+}
+h1#company-name-h1 {
+  color: white;
+  font-size: 25px;
+  font-family: 'Mermaid', sans-serif;
+}
+span#fonsy {
+  display: inline-block;
+  position: relative;
+  top: -0.2em;
+}
+span#fish {
+  display: inline-block;
+  position: relative;
+  top: 0.3em;
+}
+
+h1#company-name-h1 span {
+  font-family: 'Mermaid', sans-serif;
+  font-size: 35px;
+  color: rgba(148,193,255,255);
+}
+
+div#menu-links-div {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: flex;
+  width: 50%;
+  color: white;
+}
+
+div#menu-links-div ul {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+}
+
+div#menu-links-div ul li a {
+  font-size: 12px;
+  text-decoration: none;
+}
+
+div#menu-links-div ul li a:hover {
+  color: rgb(171, 166, 166);
+}
+
+
+
