@@ -3,7 +3,7 @@
     <div class="col">
       <div class="card">
         <% if @product.image.attached? %>
-          <%= image_tag @product.image, class: "card-img-top" %>
+          <%= image_tag @product.image, class: "product-images" %>
         <% else %>
           <div class="card-img-top">
             <span>No image available</span>
@@ -13,6 +13,13 @@
           <h5><%= @product.name %></h5>
           <h6>C<%= number_to_currency(@product.current_price) %></h6>
           <p><%= @product.description %></p>
+          <div class="product-categories-div">
+            <ul>
+            <% @product.categories.each do |category| %>
+              <li>@<%= category.name %></li>
+            <% end %>
+            </ul>
+          </div>
           <p>
             <%= @product.stock_quantity && @product.stock_quantity > 0 ? "#{@product.stock_quantity} in stock" : "Out of stock" %>
           </p>

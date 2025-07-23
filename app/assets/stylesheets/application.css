@@ -24,8 +24,20 @@ a:visited {
   font-family: sans-serif;
   margin: 0px;
   padding: 0px;
+  text-decoration: none;
 }
 
+/*Classes*/
+
+img.product-images {
+  width: 200px;
+  max-height: 125px;
+}
+
+.container {
+  padding: 15px;
+  background-color: rgb(254, 254, 253);
+}
 /* Body styles */
 
 
@@ -109,6 +121,35 @@ div#menu-links-div ul li a {
 div#menu-links-div ul li a:hover {
   color: rgb(171, 166, 166);
 }
+
+/*Products page*/
+
+div#products-div {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: space-evenly;
+}
+
+div.ind-products-div {
+  padding: 10px;
+  margin: 10px;
+  border-radius: 2px;
+  border: 1px solid #eae7e7;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+}
+
+div.ind-products-div:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+
+
+
 
 
 

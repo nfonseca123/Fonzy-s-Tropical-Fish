@@ -29,7 +29,7 @@ def index
   if @on_sale == "true"
     @products = @products.where(on_sale: true)
   end
-  @products = @products.page(params[:page]).per(5)
+  @products = @products.page(params[:page]).per(8)
 end
 
   def show
