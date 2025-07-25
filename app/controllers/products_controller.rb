@@ -9,7 +9,7 @@ def index
 
   # Handle "New Products" OR "Recently Updated"
   if @new_products == "true"
-    @products = Product.where("products.created_at  ?", 3.days.ago)
+    @products = Product.where("products.created_at >= ?", 3.days.ago)
   elsif @recently_updated_products == "true"
     @products = Product.where("products.updated_at >= ?", 3.day.ago)
   else

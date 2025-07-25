@@ -1,28 +1,30 @@
-<h1>Your Cart</h1>
+<div class="container">
+  <h1>Your Cart</h1>
 
-<% if @cart_items.any? %>
-  <ul>
-    <% @cart_items.each do |product| %>
+  <% if @cart_items.any? %>
+    <ul>
+      <% @cart_items.each do |product| %>
+        <li>
+          <%= product.name %> — Quantity: <%= cart[product.id.to_s] %>
+              Price per Unit: $<%= product.current_price %><br>
+              Total: $<%= @cart_totals[product.id] %>
+          <%= button_to "Remove", remove_from_cart_path(product), method: :delete, class: "btn btn-sm btn-danger" %>
+        </li>
+      <% end %>
       <li>
-        <%= product.name %> — Quantity: <%= cart[product.id.to_s] %>
-            Price per Unit: $<%= product.current_price %><br>
-            Total: $<%= @cart_totals[product.id] %>
-        <%= button_to "Remove", remove_from_cart_path(product), method: :delete, class: "btn btn-sm btn-danger" %>
+        <h3>Cart Total: <%=@cart_total%></h3>
       </li>
-    <% end %>
-    <li>
-      <h3>Cart Total: <%=@cart_total%></h3>
-    </li>
-  </ul>
-  <h1>Shipping Address</h1>
-  <% if !customer_signed_in? %>
-  <h1>Sign in or create an account to complete checkout</h1>
-  <%= link_to "Sign in", new_customer_session_path %>
-  <%= link_to "Create Account", new_customer_registration_path %>
-<% else %>
-  <%= render "form", province_id:@province_id%>
-<% end %>
-  <h6>Taxes are calculated at checkout.</h6>
-<% else %>
-  <p>Your cart is empty.</p>
-<% end %>
+    </ul>
+    <h1>Shipping Address</h1>
+    <% if !customer_signed_in? %>
+    <h1>Sign in or create an account to complete checkout</h1>
+    <%= link_to "Sign in", new_customer_session_path %>
+    <%= link_to "Create Account", new_customer_registration_path %>
+  <% else %>
+    <%= render "form", province_id:@province_id%>
+  <% end %>
+    <h6>Taxes are calculated at checkout.</h6>
+  <% else %>
+    <p>Your cart is empty.</p>
+  <% end %>
+</div>
