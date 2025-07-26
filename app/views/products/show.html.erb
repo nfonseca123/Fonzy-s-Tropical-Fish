@@ -1,34 +1,36 @@
 <div class="container">
-  <div class="row">
-    <div class="col">
-      <div class="card">
-        <% if @product.image.attached? %>
-          <%= image_tag @product.image, class: "product-images" %>
-        <% else %>
-          <div class="card-img-top">
-            <span>No image available</span>
+  <div id="product-show-container">
+    <div class="row">
+      <div class="col">
+        <div class="card">
+          <% if @product.image.attached? %>
+            <%= image_tag @product.image, class: "card-image" %>
+          <% else %>
+            <div class="card-img-top">
+              <span>No image available</span>
+            </div>
+          <% end %>
+          <div class="card-body-show">
+            <h5 class="card-title-show"><%= @product.name %></h5>
+            <h6 class="card-price-show">C<%= number_to_currency(@product.current_price) %></h6>
+            <p><%= @product.description %></p>
+            <div class="card-categories">
+              <ul>
+              <% @product.categories.each do |category| %>
+                <li><span>@</span><%= category.name %></li>
+              <% end %>
+              </ul>
+            </div>
+            <p class="card-stock">
+              <%= @product.stock_quantity > 0 ? "<span>#{@product.stock_quantity}</span> in stock".html_safe : "Out of stock" %>
+            </p>
+            <%= form_with url: add_to_cart_path(@product), method: :post, local: true do |form| %>
+            <div class="input-group mb-2">
+              <%= form.number_field :quantity, value: 1, min: 1, max: @product.stock_quantity, class: "product-submit"%>
+              <%= form.submit "Add to Cart", class: "product-submit" %>
+            </div>
+          <% end %>
           </div>
-        <% end %>
-        <div class="card-body">
-          <h5><%= @product.name %></h5>
-          <h6>C<%= number_to_currency(@product.current_price) %></h6>
-          <p><%= @product.description %></p>
-          <div class="product-categories-div">
-            <ul>
-            <% @product.categories.each do |category| %>
-              <li>@<%= category.name %></li>
-            <% end %>
-            </ul>
-          </div>
-          <p>
-            <%= @product.stock_quantity && @product.stock_quantity > 0 ? "#{@product.stock_quantity} in stock" : "Out of stock" %>
-          </p>
-          <%= form_with url: add_to_cart_path(@product), method: :post, local: true do |form| %>
-          <div class="input-group mb-2">
-            <%= form.number_field :quantity, value: 1, min: 1, class: "form-control", style: "max-width: 80px;" %>
-            <%= form.submit "Add to Cart", class: "btn btn-sm btn-outline-primary" %>
-          </div>
-        <% end %>
         </div>
       </div>
     </div>

@@ -214,10 +214,10 @@ footer {
 
 /* Filter Button */
 .filter-button {
-  font-weight: 600;
   padding: 0.5rem;
+  font-size: 1rem;
   background-color: rgb(163, 160, 160);
-  border-radius: 3px;
+  border-radius: 2px;
   border: none;
   transition: background-color 0.3s ease;
   cursor: pointer;
@@ -261,6 +261,7 @@ footer {
 img.product-images {
   width: 200px;
   max-height: 125px;
+  border-radius: 2px;
 }
 
 .pagination-wrapper {
@@ -289,7 +290,101 @@ img.product-images {
   color: #333;
 }
 
+.card-title {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
 
+.card-price {
+  font-size: 0.8rem;
+  color: #28a745; /* Green color for price */
+  margin-top: 5px;
+}
+
+/*Products show styles*/
+
+div#product-show-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.card-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  max-height: 225px;
+  border-radius: 2px;
+}
+
+.card {
+  display: flex;
+  flex-direction: row;
+}
+
+.card-body-show {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+  border-radius: 2px;
+  border: 1px solid #eae7e7;
+  margin-left: 10px;
+}
+
+.card-body-show ul {
+  display: flex;
+  flex-direction: row;
+  padding: 10px 0px 10px 0px;
+}
+.card-body-show ul li {
+  list-style: none;
+  margin-right: 5px;
+}
+
+.card-body-show ul li span {
+  color: #007bff; /* Blue color for category tags */
+  font-weight: bold;
+}
+
+.card-title-show {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.card-price-show {
+  font-size: 1.2rem;
+  color: #28a745;
+  margin-bottom: 10px;
+}
+
+.card-stock {
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.card-stock span {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.product-submit {
+  padding: 0.5rem;
+  font-size: 1rem;
+  background-color: rgb(163, 160, 160);
+  border-radius: 2px;
+  border: none;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.product-submit:hover {
+  background-color: rgba(148,193,255,255);
+}
 
 
 
