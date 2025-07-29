@@ -1,16 +1,64 @@
-<h2>My Orders</h2>
-
-<% @orders.each do |order| %>
-  <div class="order-summary">
-    <h3>Order #<%= order.id %> – <%= order.created_at.to_date %></h3>
-    <ul>
-      <% order.orderitems.each do |item| %>
-        <li><%= item.quantity %>x <%= item.product.name %> @ $<%= item.price_at_time_of_order %></li>
-      <% end %>
-    </ul>
-    <p>Subtotal: $<%= order.subtotal %></p>
-    <p>Tax Total: $<%= order.tax_total %></p>
-    <p>Grand Total: $<%= order.total_price %></p>
-    <p>Status: <%= order.order_status.capitalize %></p>
+<div class="container">
+  <div class="orders-page">
+    <h2 class="cart-title">My Orders</h2>
+    <% @orders.each do |order| %>
+      <table class="item-table">
+        <thead class="item-header">
+          <tr>
+            <th colspan="4">Order #<%= order.id %> – <%= order.created_at.to_date %></th>
+          </tr>
+          <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Unit Price</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody class="item-body">
+          <% order.orderitems.each do |item| %>
+            <tr class="item-row">
+              <td class="item-name"><%= item.product.name %></td>
+              <td class="item-quantity"><%= item.quantity %></td>
+              <td class="item-price">$<%= '%.2f' % item.price_at_time_of_order.to_f %></td>
+              <td class="item-total">$<%= '%.2f' % (item.price_at_time_of_order.to_f * item.quantity) %></td>
+            </tr>
+            <br>
+          <% end %>
+        </tbody>
+        <tfoot class="item-footer">
+          <tr>
+            <td colspan="3" class="total-label">Subtotal:</td>
+            <td class="total-amount">$<%= '%.2f' % order.subtotal %></td>
+          </tr>
+          <tr>
+            <td colspan="3" class="total-label">Tax Total:</td>
+            <td class="total-amount">$<%= '%.2f' % order.tax_total %></td>
+          </tr>
+          <tr>
+            <td colspan="3" class="total-label">Grand Total:</td>
+            <td class="total-amount">$<%= '%.2f' % order.total_price %></td>
+          </tr>
+          <tr>
+            <td colspan="4">
+              Status:
+              <span style="<%=
+                case order.order_status.downcase
+                when 'unpaid'
+                  'color: red;'
+                when 'paid'
+                  'color: orange;'
+                when 'shipped'
+                  'color: green;'
+                else
+                  'color: black;'
+                end
+              %>">
+                <%= order.order_status.capitalize %>
+              </span>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    <% end %>
   </div>
-<% end %>
+</div>

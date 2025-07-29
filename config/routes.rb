@@ -21,6 +21,5 @@ Rails.application.routes.draw do
   match "checkout", to: "orders#checkout", via: [ :get, :post ], as: :checkout
   post "checkout/payment", to: "orders#start_payment", as: :start_payment
   get "order/success", to: "orders#success", as: :order_success
-  resources :orders, only: [:index, :show]
-
+  resources :orders, only: [ :index, :show ]
 end

@@ -306,7 +306,9 @@ img.product-images {
 
 div#product-show-container {
   display: flex;
+  height: 100%;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   padding: 20px;
 }
@@ -327,6 +329,7 @@ div#product-show-container {
 
 .card-body-show {
   display: flex;
+  max-height: 225px;
   flex-direction: column;
   justify-content: center;
   padding: 20px;
@@ -353,7 +356,6 @@ div#product-show-container {
 .card-title-show {
   font-size: 1.5rem;
   font-weight: bold;
-  margin-bottom: 10px;
 }
 
 .card-price-show {
@@ -414,10 +416,12 @@ div#product-show-container {
 
 .form h2 {
   text-align: left;
+  font-weight: 100;
+  font-size: 3em;
 }
 
-.container h6 {
-  margin-top: 20px;
+.taxes-message {
+  width: 400px;
 }
 
 .form * a:hover {
@@ -441,6 +445,141 @@ div#product-show-container {
 .form-submit:hover {
   background-color: rgba(148,193,255,255);
 }
+
+.login-alternatives {
+  margin-top: 10px;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/*Cart styles*/
+
+.cart-container {
+  padding: 15px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.shipping-form {
+  width: 400px;
+}
+
+.cart-title {
+  width: 400px;
+  font-weight: 100;
+  font-size: 2em;
+  margin: 10px 10px 10px 0px;
+}
+
+.remove-btn {
+  display: flex;
+  justify-content: center;
+  padding: 0.2rem;
+  font-size: 0.75rem;
+  background-color: rgb(240, 41, 41);
+  border: none;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  width: 100%;
+}
+
+.remove-btn:hover {
+  background-color: #c22210;
+}
+
+.item-table,
+.shipping-form,
+.taxes-message {
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+.item-table {
+  width: 400px;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+}
+
+.item-table th,
+.item-table td {
+  border: 1px solid #ccc;
+  padding: 4px;
+  text-align: left;
+}
+
+.item-header {
+  background-color: #f2f2f2;
+}
+
+.item-footer {
+  background-color: #f9f9f9;
+}
+
+.item-row:hover {
+  background-color: #f5f5f5;
+}
+
+td.item-remove{
+  color: white;
+  border: 0px;
+  cursor: pointer;
+  height: 100%;
+}
+
+td.total-label {
+  text-align: right;
+}
+
+
+.total-amount {
+  font-size: 1.1em;
+  color: #2c3e50;
+}
+
+.sign-in-prompt {
+  font-weight: 100;
+  font-size: 2em;
+  margin: 10px 10px 10px 10px;
+}
+
+.sign-in-or-create-account {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.sign-in-or-create-account li {
+  list-style: none;
+  margin: 5px;
+}
+
+.sign-in-or-create-account li a {
+  color: #0066CC;
+}
+
+.sign-in-or-create-account li a:hover {
+  text-decoration: underline;
+}
+
+/*Order History*/
+
+.orders-page {
+  padding: 15px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 
 
 
