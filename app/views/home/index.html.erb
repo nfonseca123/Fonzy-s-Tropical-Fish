@@ -1,5 +1,9 @@
 <div class="container">
   <h1>Home#index</h1>
-  <p>Find me in app/views/home/index.html.erb</p>
+  <div id="slider">
+    <% @products.each do |product| %>
+      <%= image_tag product.image.url, size: "1200x800", alt: product.name %>
+    <% end %>
+  </div>
 </div>
 

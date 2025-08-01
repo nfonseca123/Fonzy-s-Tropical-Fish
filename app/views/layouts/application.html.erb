@@ -21,6 +21,20 @@
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
+  <% if params[:order_success]%>
+    <div id="successPrompt" class="custom-prompt">
+      Payment successful! Your order has been placed. Confirmation email sent!
+    </div>
+
+    <script>
+      setTimeout(() => {
+        const prompt = document.getElementById('successPrompt');
+        if (prompt) {
+          setTimeout(() => prompt.remove(), 2000);
+        }
+      }, 5000);
+    </script>
+  <% end %>
 
   <body>
     <%= render "shared/menu" %>

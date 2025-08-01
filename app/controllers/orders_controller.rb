@@ -124,6 +124,8 @@ class OrdersController < ApplicationController
 
     session.delete(:cart)
     session.delete(:order_id)
+
+    redirect_to root_path(order_success: true)
   end
 
 

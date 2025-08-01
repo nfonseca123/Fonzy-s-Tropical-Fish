@@ -46,6 +46,13 @@ body {
   padding: 20px;
   flex: 1; /* Allows the container to grow and fill available space */
 }
+
+.custom-prompt {
+  background-color: rgb(101, 220, 101);
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+}
 /* Body styles */
 
 
@@ -569,6 +576,11 @@ td.total-label {
   text-decoration: underline;
 }
 
+.empty-message {
+  width: 400px;
+  color: red;
+}
+
 /*Order History*/
 
 .orders-page {
@@ -580,9 +592,26 @@ td.total-label {
   align-items: center;
 }
 
+/*Checkout styles*/
 
+td.subtotal-label,
+td.gst-label,
+td.pst-label,
+td.hst-label,
+td.total-label {
+  text-align: right;
+}
 
+/*Home*/
 
+.slick-next {
+  right: 10px !important;
+  z-index: 100;
+}
+.slick-prev {
+  left: 10px !important;
+  z-index: 100;
+}
 
 
 

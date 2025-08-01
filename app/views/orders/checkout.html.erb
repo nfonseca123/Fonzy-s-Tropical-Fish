@@ -1,46 +1,66 @@
-<h2>Review Your Order</h2>
+<div class="container">
+  <div class="cart-container">
+    <h1 class="cart-title">Review Your Order</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Product</th>
-      <th>Quantity</th>
-      <th>Price</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @cart_items.each do |item| %>
-      <tr>
-        <td><%= item.name %></td>
-        <td><%= cart[item.id.to_s] %></td>
-        <td>$<%= '%.2f' % item.current_price %></td>
-      </tr>
+    <table class="item-table">
+      <thead class="item-header">
+        <tr>
+          <th>Product</th>
+          <th>Quantity</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody class="item-body">
+        <% @cart_items.each do |item| %>
+          <tr class="item-row">
+            <td class="item-name"><%= item.name %></td>
+            <td><%= cart[item.id.to_s] %></td>
+            <td>$<%= '%.2f' % item.current_price %></td>
+          </tr>
+        <% end %>
+      </tbody>
+      <tfoot class="item-footer">
+        <tr>
+          <td colspan="2" class="subtotal-label"><strong>Subtotal:</strong></td>
+          <td class="subtotal-amount">$<%= '%.2f' % @cart_subtotal %></td>
+        </tr>
+        <tr>
+          <td colspan="2" class="gst-label"><strong>GST:</strong></td>
+          <td class="gst-amount">$<%= '%.2f' % (@cart_subtotal * @gst_rate) %></td>
+        </tr>
+        <tr>
+          <td colspan="2" class="pst-label"><strong>PST:</strong></td>
+          <td class="pst-amount">$<%= '%.2f' % (@cart_subtotal * @pst_rate) %></td>
+        </tr>
+        <tr>
+          <td colspan="2" class="hst-label"><strong>HST:</strong></td>
+          <td class="hst-amount">$<%= '%.2f' % (@cart_subtotal * @hst_rate) %></td>
+        </tr>
+        <tr class="total-row">
+          <td colspan="2" class="total-label"><strong>Total:</strong></td>
+          <td class="total-amount">$<%= '%.2f' % @total_price %></td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <!-- Submit full order to Stripe -->
+    <%= form_with url: start_payment_path, method: :post, local: true do |form| %>
+      <%= form.hidden_field :address_line1, value: @order_params[:address_line1] %>
+      <%= form.hidden_field :address_line2, value: @order_params[:address_line2] %>
+      <%= form.hidden_field :city, value: @order_params[:city] %>
+      <%= form.hidden_field :postal_code, value: @order_params[:postal_code] %>
+      <%= form.hidden_field :province_id, value: @province_id %>
+
+      <!-- Pricing fields -->
+      <%= form.hidden_field :subtotal, value: @cart_subtotal %>
+      <%= form.hidden_field :gst_amount, value: (@cart_subtotal * @gst_rate).round(2) %>
+      <%= form.hidden_field :pst_amount, value: (@cart_subtotal * @pst_rate).round(2) %>
+      <%= form.hidden_field :hst_amount, value: (@cart_subtotal * @hst_rate).round(2) %>
+      <%= form.hidden_field :tax_total, value: @tax_total.round(2) %>
+      <%= form.hidden_field :total_price, value: @total_price.round(2) %>
+      <%= form.hidden_field :order_status, value: "unpaid" %>
+
+      <%= form.submit "Pay with Stripe", class: "form-submit" %>
     <% end %>
-  </tbody>
-</table>
-
-<p><strong>Subtotal:</strong> $<%= '%.2f' % @cart_subtotal %></p>
-<p><strong>GST:</strong> $<%= '%.2f' % (@cart_subtotal * @gst_rate) %></p>
-<p><strong>PST:</strong> $<%= '%.2f' % (@cart_subtotal * @pst_rate) %></p>
-<p><strong>HST:</strong> $<%= '%.2f' % (@cart_subtotal * @hst_rate) %></p>
-<p><strong>Total:</strong> $<%= '%.2f' % @total_price %></p>
-
-<!-- Submit full order to Stripe -->
-<%= form_with url: start_payment_path, method: :post, local: true do |form| %>
-  <%= form.hidden_field :address_line1, value: @order_params[:address_line1] %>
-  <%= form.hidden_field :address_line2, value: @order_params[:address_line2] %>
-  <%= form.hidden_field :city, value: @order_params[:city] %>
-  <%= form.hidden_field :postal_code, value: @order_params[:postal_code] %>
-  <%= form.hidden_field :province_id, value: @province_id %>
-
-  <!-- Pricing fields -->
-  <%= form.hidden_field :subtotal, value: @cart_subtotal %>
-  <%= form.hidden_field :gst_amount, value: (@cart_subtotal * @gst_rate).round(2) %>
-  <%= form.hidden_field :pst_amount, value: (@cart_subtotal * @pst_rate).round(2) %>
-  <%= form.hidden_field :hst_amount, value: (@cart_subtotal * @hst_rate).round(2) %>
-  <%= form.hidden_field :tax_total, value: @tax_total.round(2) %>
-  <%= form.hidden_field :total_price, value: @total_price.round(2) %>
-  <%= form.hidden_field :order_status, value: "unpaid" %>
-
-  <%= form.submit "Pay with Stripe", class: "btn btn-success" %>
-<% end %>
+  </div>
+</div>
