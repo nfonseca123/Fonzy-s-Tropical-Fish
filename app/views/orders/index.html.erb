@@ -1,6 +1,11 @@
 <div class="container">
   <div class="orders-page">
     <h2 class="cart-title">My Orders</h2>
+    <p class="empty-message">
+      <% if @orders.size == 0 %>
+        No orders found
+      <% end %>
+    </p>
     <% @orders.each do |order| %>
       <table class="item-table">
         <thead class="item-header">

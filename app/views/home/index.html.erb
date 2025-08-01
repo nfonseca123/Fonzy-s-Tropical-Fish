@@ -1,9 +1,22 @@
 <div class="container">
-  <h1>Home#index</h1>
-  <div id="slider">
-    <% @products.each do |product| %>
-      <%= image_tag product.image.url, size: "1200x800", alt: product.name %>
-    <% end %>
+  <div class="home-page">
+    <div class="about-us">
+      <h2>🐠 Welcome to Fonsy's Tropical Fish!</h2>
+      <p>At Fonsy's, we're more than just a tropical fish store — we're a family-owned and Winnipeg-operated business with a deep passion for aquatic life and a commitment to our community. Since day one, we've taken pride in offering a personalized experience, expert advice, and a vibrant selection of healthy, beautiful fish. Whether you're a seasoned aquarist or just starting your underwater journey, you'll find a welcoming atmosphere and knowledgeable support from a team that treats every customer like part of the family. Dive in and discover why Fonsy's is Winnipeg’s trusted name in tropical fish.</p>
+    </div>
+
+    <div class="splide">
+      <h1><span class="highlight">Featured</span> Products</h1>
+      <div class="splide__track">
+        <ul class="splide__list">
+          <% @products.each do |product| %>
+            <li class="splide__slide">
+              <%= image_tag url_for(product.image), alt: product.name %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
   </div>
 </div>
 

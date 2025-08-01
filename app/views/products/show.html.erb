@@ -22,13 +22,15 @@
               </ul>
             </div>
             <p class="card-stock">
-              <%= @product.stock_quantity > 0 ? "<span>#{@product.stock_quantity}</span> in stock".html_safe : "Out of stock" %>
+              <%= @product.stock_quantity > 0 ? "<span>#{@product.stock_quantity}</span> in stock".html_safe : '<span class="empty-message">Out of stock</span>'.html_safe %>
             </p>
-            <%= form_with url: add_to_cart_path(@product), method: :post, local: true do |form| %>
-            <div class="input-group mb-2">
-              <%= form.number_field :quantity, value: 1, min: 1, max: @product.stock_quantity, class: "product-submit"%>
-              <%= form.submit "Add to Cart", class: "product-submit" %>
-            </div>
+            <% if @product.stock_quantity > 0 %>
+              <%= form_with url: add_to_cart_path(@product), method: :post, local: true do |form| %>
+              <div class="input-group mb-2">
+                <%= form.number_field :quantity, value: 1, min: 1, max: @product.stock_quantity, class: "product-submit"%>
+                <%= form.submit "Add to Cart", class: "product-submit" %>
+              </div>
+            <%end%>
           <% end %>
           </div>
         </div>

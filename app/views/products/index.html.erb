@@ -68,7 +68,14 @@
                   <% end %>
                   <div class="card-body">
                     <h5 class="card-title"><%= product.name %></h5>
-                    <h6 class="card-price">C<%= number_to_currency(product.current_price) %></h6>
+                    <div class="card-price-and-message">
+                      <h6 class="card-price">C<%= number_to_currency(product.current_price) %></h6>
+                      <% if product.stock_quantity == 0 %>
+                        <h5 class="sold-out">Sold out</h5>
+                      <% elsif product.on_sale && product.stock_quantity > 0 %>
+                        <h5 class="on-sale">On sale</h5>
+                      <% end %>
+                    </div>
                   </div>
                 </div>
               <% end %>
